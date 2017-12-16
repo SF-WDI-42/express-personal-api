@@ -11,5 +11,5 @@
 //   }
 
 //   console.log("Created new campsite", campsite._id)
-//   process.exit(); // we're all done! Exit the program when you're done.
+//   process.exit(); // we're all done! Exit the program.
 // })
