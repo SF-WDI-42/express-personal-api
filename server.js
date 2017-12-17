@@ -1,6 +1,9 @@
-// require express and other modules
-var express = require('express'),
-    app = express();
+/****************
+ * REQUIREMENTS *
+ ****************/
+var express = require('express');
+var app = express();
+var mongoose =  require('mongoose');
 
 // parse incoming urlencoded form data
 // and populate the req.body object
@@ -19,7 +22,7 @@ app.use(function(req, res, next) {
  * DATABASE *
  ************/
 
-// var db = require('./models');
+var db = require('./models');
 
 /**********
  * ROUTES *
@@ -47,14 +50,30 @@ app.get('/api', function apiIndex(req, res) {
   // It would be seriously overkill to save any of this to your database.
   // But you should change almost every line of this response.
   res.json({
-    woopsIForgotToDocumentAllMyEndpoints: true, // CHANGE ME ;)
-    message: "Welcome to my personal api! Here's what you need to know!",
-    documentationUrl: "https://github.com/example-username/express-personal-api/README.md", // CHANGE ME
-    baseUrl: "http://YOUR-APP-NAME.herokuapp.com", // CHANGE ME
+    woopsIForgotToDocumentAllMyEndpoints: false, // CHANGE ME ;) -done
+    message: "Welcome to Adam's personal api! Here's what you need to know!",
+    documentationUrl: "https://github.com/AdamMenard/express-personal-api", // CHANGE ME -done
+    baseUrl: "https://rocky-woodland-71835.herokuapp.com/", // CHANGE ME - done
     endpoints: [
-      {method: "GET", path: "/api", description: "Describes all available endpoints"},
-      {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/campsites", description: "E.g. Create a new campsite"} // CHANGE ME
+      {method: "GET",
+       path: "/api",
+       description: "Describes all available endpoints"},
+      {method: "GET",
+       path: "/api/profile",
+       description: "Information about Adam",
+       githubUserName: String,
+       githubLink: String,
+       guthubProfileImage: String,
+       personalSiteLink: String,
+       currentCity: String,
+       pets: [
+         {name: "Molly",
+          type: "Dog",
+          breed: "Pom-Chi"}]
+        }, // CHANGE ME - done
+      {method: "POST",
+       path: "/api/hobbies",
+       description: "Creates a new hobby for Adam"} // CHANGE ME - done
     ]
   })
 });
