@@ -1,7 +1,18 @@
-body {
+/*body {
   color: #333;
   font-family: Helvetica, Arial, sans-serif;
-  background-color: skyblue; /* Sanity Check! */
+  background-color: skyblue; 
+}*/
+
+.container-fluid {
+  background-image: url("http://glacierhub.org/wp-content/uploads/2014/07/skifree-e1406143623416.jpg");
+  min-height: 100vh;
+}
+
+.title {
+  background-image: url("https://i.imgur.com/PlYqyXm.png");
+  height: 155px;
+  width: 1440px;
 }
 
 h1 {
