@@ -5,6 +5,16 @@
 
 // var new_campsite = {description: "Sharp rocks. Middle of nowhere."}
 
+//var info_list =
+
+
+
+
+
+
+
+
+
 // db.Campsite.create(new_campsite, function(err, campsite){
 //   if (err){
 //     return console.log("Error:", err);
