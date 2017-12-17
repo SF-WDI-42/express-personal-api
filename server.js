@@ -19,7 +19,7 @@ app.use(function(req, res, next) {
  * DATABASE *
  ************/
 
-// var db = require('./models');
+var db = require('./models');
 
 /**********
  * ROUTES *
@@ -37,6 +37,34 @@ app.get('/', function homepage(req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
+app.get('/api/contacts', function(req, res) {
+  db.Contact.find(function(err, contacts) {
+    if (err) { return console.log("Index error:", err) };
+    res.json(contacts);
+  });
+});
+
+app.get('/api/contacts/:id', function(req, res) {
+  db.Contact.findOne({ _id: req.params.id }, function(err, contact) {
+    if (err) { return console.log("Index error:", err) };
+    res.json(contact);
+  });
+});
+
+app.post('/api/contacts', function(req, res) {
+  var newContact = new db.Contact ({
+    name: req.body.name,
+    phoneNumber: req.body.phoneNumber,
+    email: req.body.email,
+    birthday: req.body.birthday
+  });
+  newContact.save(function(err, contact) {
+    if (err) { return console.log("save error:", err) };
+    res.json(contact);
+  });
+});
+
+
 
 /*
  * JSON API Endpoints
@@ -53,8 +81,8 @@ app.get('/api', function apiIndex(req, res) {
     baseUrl: "http://YOUR-APP-NAME.herokuapp.com", // CHANGE ME
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
-      {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/campsites", description: "E.g. Create a new campsite"} // CHANGE ME
+      {method: "GET", path: "/api/contacts", description: "All my contacts"}, // CHANGE ME
+      {method: "POST", path: "/api/contacts", description: "E.g. Create a new contact"} // CHANGE ME
     ]
   })
 });
