@@ -48,7 +48,7 @@ app.get('/api', function apiIndex(req, res) {
   // It would be seriously overkill to save any of this to your database.
   // But you should change almost every line of this response.
   res.json({
-    woopsIForgotToDocumentAllMyEndpoints: false, // CHANGE ME ;)
+    woopsIForgotToDocumentAllMyEndpoints: true, // CHANGE ME ;)
     message: "Welcome to my Patrick's Life! Feel Free to Take a Look!",
     documentationUrl: "https://github.com/pmxperiment/express-personal-api", // CHANGE ME
     baseUrl: "https://nameless-escarpment-44875.herokuapp.com/", // CHANGE ME
