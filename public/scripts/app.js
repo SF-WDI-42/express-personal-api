@@ -18,7 +18,6 @@ $(document).ready(function(){
     $('#contactModal').modal(); //triggers modal
     console.log("modal open!")
       $('form').on('submit', function(e) {
-        e.preventDefault();
         console.log("button clicked");
         $.ajax({
           method: 'POST',
