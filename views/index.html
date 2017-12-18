@@ -7,21 +7,60 @@
     <title>Blank</title>
 
     <!-- STYLESHEETS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
 
     <!-- VENDOR SCRIPTS -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 
     <!-- APPLICATION SCRIPTS -->
-    <script src="/scripts/app.js"></script>
-  </head>
+    <script src="scripts/app.js"></script>
+  </head> 
   <body>
     <div class="container">
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
-          <h1>Under Construction</h1>
+          <h1>Urban Experiences</h1><br> 
+          <div class="image-container"></div>
           <h4><a href="/api">Read My API Documentation</a></h4>
+          <h4><a href="/api/profile">Some basics about me</a></h4><br>
+          <form class="form-horizontal">
+            <fieldset>
+
+              <!-- Form Name -->
+              <legend>Add New City</legend>
+
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="name">City Name</label>
+                <div class="col-md-4">
+                <input id="name" name="name" type="text" placeholder="" class="form-control input-md" required="">
+                </div>
+              </div>
+
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="Description">Description</label>
+                <div class="col-md-4">
+                <input id="textinput" name="description" type="text" placeholder="" class="form-control input-md">
+                </div>
+              </div>
+
+              <!-- Button -->
+              <div class="form-group">
+                <div class="col-md-4">
+                  <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+
+          <div id="cityTarget">
+            <h3>Some places I've been</h3>
+            
+
+          
+          </div>
         </div>
       </div>
     </div>

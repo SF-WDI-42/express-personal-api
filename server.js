@@ -2,6 +2,7 @@
 var express = require('express'),
     app = express();
 
+
 // parse incoming urlencoded form data
 // and populate the req.body object
 var bodyParser = require('body-parser');
@@ -19,7 +20,7 @@ app.use(function(req, res, next) {
  * DATABASE *
  ************/
 
-// var db = require('./models');
+var db = require('./models');
 
 /**********
  * ROUTES *
@@ -43,21 +44,69 @@ app.get('/', function homepage(req, res) {
  */
 
 app.get('/api', function apiIndex(req, res) {
-  // TODO: Document all your api endpoints below as a simple hardcoded JSON object.
-  // It would be seriously overkill to save any of this to your database.
-  // But you should change almost every line of this response.
   res.json({
-    woopsIForgotToDocumentAllMyEndpoints: true, // CHANGE ME ;)
     message: "Welcome to my personal api! Here's what you need to know!",
-    documentationUrl: "https://github.com/example-username/express-personal-api/README.md", // CHANGE ME
-    baseUrl: "http://YOUR-APP-NAME.herokuapp.com", // CHANGE ME
-    endpoints: [
-      {method: "GET", path: "/api", description: "Describes all available endpoints"},
-      {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/campsites", description: "E.g. Create a new campsite"} // CHANGE ME
-    ]
-  })
-});
+    documentationUrl: "https://github.com/tinaparija/express-personal-api/README.md", 
+    baseUrl: "https://boiling-island-18436.herokuapp.com/", // 
+    endpoints: [{
+          method: "GET",
+          path: "/api",
+          description: "describes all endpoints"
+        },
+        {
+          method: "GET",
+          path: "/api/profile",
+          description: "who I am"
+        },
+        {
+          method: "GET",
+          path: "api/cities",
+          description: "places I've been"
+        },
+        {
+          method: "POST",
+          path: "/api/cities",
+          description: "adds new cities"
+        }]
+      }); 
+  }); 
+
+app.get('/api/profile', function apiIndex(req, res) {
+  res.json(
+    {
+      name: "Tina Parija",
+      githubUsername: "tinaparija",
+      githubLink: "https://github.com/tinaparija", 
+      githubProfileImage: "https://avatars1.githubusercontent.com/u/14307666?s=460&v=4", 
+      personalSiteLink: "https://tinaparija.github.io/", 
+      currentCity: "San Francisco, CA", 
+      myFriends: "https://scontent.fsjc1-3.fna.fbcdn.net/v/t31.0-8/16113128_10154478188495756_6066480429500902272_o.jpg?oh=0a6cad3b47d31ff1ab9e5174dbc945ab&oe=5AB4594C", 
+      Hobbies: [{name: "hiking", time_investment: "low"},{name: "plant caretaking", time_investment: "high"},{name:"writing", time_investment: "high"}, {name:"cooking", timeInvestment: "medium"}]
+    },
+  ); 
+}); 
+
+app.get('/api/cities', function apiIndex(req, res) {
+  db.City.find({}, function(err, cities) {
+      res.json(cities);
+  });
+}); 
+
+app.post('/api/cities', function apiIndex(req, res){
+  var newCity = db.City({
+    name: req.body.name, 
+    description: req.body.description
+  });  
+   
+  newCity.save(function(err, newCity){
+    if(err) {return console.log(err);}
+    console.log("saved new city: ", newCity);
+  });
+      res.json(newCity);
+})
+
+
+
 
 /**********
  * SERVER *
@@ -65,5 +114,5 @@ app.get('/api', function apiIndex(req, res) {
 
 // listen on the port that Heroku prescribes (process.env.PORT) OR port 3000
 app.listen(process.env.PORT || 3000, function () {
-  console.log('Express server is up and running on http://localhost:3000/');
-});
+  console.log('Express server is up and running on http://localhost:3000/')
+})
