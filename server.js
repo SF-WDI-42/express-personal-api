@@ -25,6 +25,7 @@ app.use(function(req, res, next) {
  * ROUTES *
  **********/
 
+
 // Serve static files from the `/public` directory:
 // i.e. `/images`, `/scripts`, `/styles`
 app.use(express.static('public'));
@@ -48,16 +49,42 @@ app.get('/api', function apiIndex(req, res) {
   // But you should change almost every line of this response.
   res.json({
     woopsIForgotToDocumentAllMyEndpoints: true, // CHANGE ME ;)
-    message: "Welcome to my personal api! Here's what you need to know!",
-    documentationUrl: "https://github.com/example-username/express-personal-api/README.md", // CHANGE ME
-    baseUrl: "http://YOUR-APP-NAME.herokuapp.com", // CHANGE ME
+    message: "Welcome to my Patrick's Life! Feel Free to Take a Look!",
+    documentationUrl: "https://github.com/pmxperiment/express-personal-api", // CHANGE ME
+    baseUrl: "https://nameless-escarpment-44875.herokuapp.com/", // CHANGE ME
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
-      {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/campsites", description: "E.g. Create a new campsite"} // CHANGE ME
+      {method: "GET", path: "/api/profile", description: "All About Me"}, // CHANGE ME
+      {method: "GET", path: "/api/interests", description: "About my Interests"}, // CHANGE ME
+      {method: "POST", path: "/api/interests", description: "Add new interest"},
+      {method: "PUT", path: "/api/interest/:id", description: "Edit current interest"}, // CHANGE ME
+      {method: "DELETE", path: "/api/interest/:id", description: "Delete an interest"}, // CHANGE ME
     ]
   })
 });
+
+app.get('/api/profile', function profileIndex(req, res) {
+  res.json({
+    name: "Patrick Orara",
+    githubUsername: "pmxperiment",
+    githubLink: "https://github.com/pmxperiment/express-personal-api",
+    githubProfileImage: "",
+    personalSiteLin: "",
+    currentCity: "San Francisco",
+    hobbies: [
+      {name: "videography", type: "Biography", description: ""},
+      {name: "travel", type: "Sport", description: ""}
+    ]
+  })
+});
+
+
+
+
+
+
+
+
 
 /**********
  * SERVER *
