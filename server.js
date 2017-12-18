@@ -4,11 +4,16 @@
 var express = require('express');
 var app = express();
 var mongoose =  require('mongoose');
+var db = require('./models');
+var controllers = require('./controllers');
+
 
 // parse incoming urlencoded form data
 // and populate the req.body object
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
+
+
 
 // allow cross origin requests (optional)
 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
@@ -22,7 +27,7 @@ app.use(function(req, res, next) {
  * DATABASE *
  ************/
 
-var db = require('./models');
+
 
 /**********
  * ROUTES *
@@ -58,6 +63,7 @@ app.get('/api', function apiIndex(req, res) {
       {method: "GET",
        path: "/api",
        description: "Describes all available endpoints"},
+
       {method: "GET",
        path: "/api/profile",
        description: "Information about Adam",
@@ -71,12 +77,31 @@ app.get('/api', function apiIndex(req, res) {
           type: "Dog",
           breed: "Pom-Chi"}]
         }, // CHANGE ME - done
+
       {method: "POST",
        path: "/api/hobbies",
-       description: "Creates a new hobby for Adam"} // CHANGE ME - done
+       description: "Creates a new hobby for Adam"}, // CHANGE ME - done
+
+      {method: "POST",
+       path: "/api/projects",
+       description: "Adds one of Adam's very interesting projects"}
     ]
   })
 });
+
+});
+
+// GET ALL Projects
+function index(req, res) {
+  // access database and pull out all projects
+  db.Album.find({}, function(err, allProjects) {
+    res.json(allProjects);
+  });
+}
+
+
+
+
 
 /**********
  * SERVER *
