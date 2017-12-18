@@ -1,10 +1,18 @@
-// require express and other modules
-var express = require('express'),
-    app = express();
+// SERVER-SIDE JAVASCRIPT
 
-// parse incoming urlencoded form data
-// and populate the req.body object
-var bodyParser = require('body-parser');
+// require Express, create an Express app
+var express = require('express'),
+    bodyParser = require('body-parser'),
+    // controllers = require('./controllers'),
+    db = require('./models');
+
+// generate a new express app and call it 'app'
+var app = express();
+
+// serve the public directory as a static file directory
+app.use(express.static('public'));
+
+// add the body-parser middleware to the server
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // allow cross origin requests (optional)
@@ -15,46 +23,66 @@ app.use(function(req, res, next) {
   next();
 });
 
-/************
- * DATABASE *
- ************/
-
-// var db = require('./models');
-
 /**********
  * ROUTES *
  **********/
 
-// Serve static files from the `/public` directory:
-// i.e. `/images`, `/scripts`, `/styles`
-app.use(express.static('public'));
 
 /*
  * HTML Endpoints
  */
+// provided endpoint
+// app.get('/', function homepage (req, res) {
+//   res.sendFile(__dirname + '/views/index.html');
+// });
 
-app.get('/', function homepage(req, res) {
-  res.sendFile(__dirname + '/views/index.html');
+// endpoint used in Ski-Me
+app.get('/', function homepage (req, res) {
+  res.sendFile('views/index.html', { root : __dirname });
 });
 
+// get all ski runs
+app.get('/api/skiruns', function index(req, res) {
+  db.SkiRun.find({}, function(err, data) {
+    if (err) {
+      console.log(err)
+    }
+    res.json(data);
+  })
+});
 
-/*
- * JSON API Endpoints
- */
+// // get one ski run
+app.get('/api/skiruns/:id', function show(req, res) {
+  db.SkiRun.find({_id: req.params.id}, function(err, data) {
+    res.json(data);
+  });
+});
+
+// create new ski run
+// app.post('/api/skiruns', function create(req, res) {
+//   console.log(req.body);
+//   db.SkiRun.create(req.body, function(err, data) {
+//     res.json(data);
+//   })
+
+
+// });
+
+
 
 app.get('/api', function apiIndex(req, res) {
   // TODO: Document all your api endpoints below as a simple hardcoded JSON object.
   // It would be seriously overkill to save any of this to your database.
   // But you should change almost every line of this response.
   res.json({
-    woopsIForgotToDocumentAllMyEndpoints: true, // CHANGE ME ;)
-    message: "Welcome to my personal api! Here's what you need to know!",
-    documentationUrl: "https://github.com/example-username/express-personal-api/README.md", // CHANGE ME
-    baseUrl: "http://YOUR-APP-NAME.herokuapp.com", // CHANGE ME
+    woopsIForgotToDocumentAllMyEndpoints: false,
+    message: "Welcome to SkiMe!",
+    documentationUrl: "https://github.com/kjkeaston/express-personal-api",
+    baseUrl: "localhost:3000", 
     endpoints: [
-      {method: "GET", path: "/api", description: "Describes all available endpoints"},
-      {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/campsites", description: "E.g. Create a new campsite"} // CHANGE ME
+      {method: "GET", path: "/api", description: "Describes available endpoints"},
+      {method: "GET", path: "/api/skiruns", description: "json of ski runs"},
+      {method: "POST", path: "/api/skiruns", description: "Add a new ski run"}
     ]
   })
 });
@@ -62,6 +90,7 @@ app.get('/api', function apiIndex(req, res) {
 /**********
  * SERVER *
  **********/
+
 
 // listen on the port that Heroku prescribes (process.env.PORT) OR port 3000
 app.listen(process.env.PORT || 3000, function () {

@@ -3,7 +3,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-// skiRunReview schema
+// SkiRun schema
 var SkiRunSchema = new Schema({
   resort: String,
   skiTrail: String,
@@ -12,7 +12,7 @@ var SkiRunSchema = new Schema({
   runCondition: String
 });
 
-// skiRun model
+// SkiRun model
 var SkiRun = mongoose.model('SkiRun', SkiRunSchema);
 
 module.exports = SkiRun;
