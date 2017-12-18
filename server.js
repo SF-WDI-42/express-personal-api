@@ -19,7 +19,7 @@ app.use(function(req, res, next) {
  * DATABASE *
  ************/
 
-// var db = require('./models');
+var db = require('./models');
 
 /**********
  * ROUTES *
@@ -37,6 +37,40 @@ app.get('/', function homepage(req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
+app.get('/api/contacts', function(req, res) {
+  db.Contact.find(function(err, contacts) {
+    if (err) { return console.log("Index error:", err) };
+    res.json(contacts);
+  });
+});
+
+app.get('/api/contacts/:id', function(req, res) {
+  db.Contact.findOne({ _id: req.params.id }, function(err, contact) {
+    if (err) { return console.log("Index error:", err) };
+    res.json(contact);
+  });
+});
+
+app.post('/api/contacts', function(req, res) {
+  var newContact = new db.Contact ({
+    name: req.body.name,
+    phoneNumber: req.body.phoneNumber,
+    email: req.body.email,
+    birthday: req.body.birthday
+  });
+  newContact.save(function(err, contact) {
+    if (err) { return console.log("save error:", err) };
+    res.json(contact);
+  });
+});
+
+app.delete('api/contacts/:id', function(req, res) {
+  let contactId = req.params.id;
+  db.Contact.findOneAndRemove({ _id: contactId }, function(err, deletedContact) {
+    if (err) {console.log("error", err)}
+    res.json(deletedContact);
+  });
+});
 
 /*
  * JSON API Endpoints
@@ -47,14 +81,13 @@ app.get('/api', function apiIndex(req, res) {
   // It would be seriously overkill to save any of this to your database.
   // But you should change almost every line of this response.
   res.json({
-    woopsIForgotToDocumentAllMyEndpoints: true, // CHANGE ME ;)
-    message: "Welcome to my personal api! Here's what you need to know!",
+    message: "Welcome to my personal api address book! Here's what you need to know!",
     documentationUrl: "https://github.com/example-username/express-personal-api/README.md", // CHANGE ME
     baseUrl: "http://YOUR-APP-NAME.herokuapp.com", // CHANGE ME
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
-      {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/campsites", description: "E.g. Create a new campsite"} // CHANGE ME
+      {method: "GET", path: "/api/contacts", description: "See all my contacts"}, // CHANGE ME
+      {method: "POST", path: "/api/contacts", description: "Create a new contact"} // CHANGE ME
     ]
   })
 });
@@ -64,6 +97,4 @@ app.get('/api', function apiIndex(req, res) {
  **********/
 
 // listen on the port that Heroku prescribes (process.env.PORT) OR port 3000
-app.listen(process.env.PORT || 3000, function () {
-  console.log('Express server is up and running on http://localhost:3000/');
-});
+ app.listen(process.env.PORT || 3000)
