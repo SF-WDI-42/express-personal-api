@@ -1,10 +1,70 @@
+/*https://tripalong.files.wordpress.com/2012/04/vintage-ski1.jpg*/
+.jumbotron {
+  background-image: url("https://www.retroskiday.org/wp-content/uploads/2017/10/gallery.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #EEE;
+}
+.jumbotron .container {
+  height: 250px;
+  color: black;
+}
+
+.inline-header {
+  display: inline-block;
+  vertical-align: baseline;
+  margin-right: 12px;
+}
+
 body {
-  color: #333;
-  font-family: Helvetica, Arial, sans-serif;
-  background-color: skyblue; /* Sanity Check! */
+  background-image: url("http://glacierhub.org/wp-content/uploads/2014/07/skifree-e1406143623416.jpg");
+}
+
+label {
+  font-size: 20px;
+}
+
+legend {
+  font-size: 25px;
+}
+
+.ski-run-art {
+  height: 200px;
+  width: 200px;
+}
+
+#yeti-gif {
+  height: 50px;
+  width: 50px;
+  float: left;
+}
+
+
+
+
+
+
+
+
+
+
+/*!!!!!*/
+/*my oringinal css*/
+/*!!!!!*/
+
+/*.container-fluid {
+  background-image: url("http://glacierhub.org/wp-content/uploads/2014/07/skifree-e1406143623416.jpg");
+  min-height: 100vh;
+}
+
+.yeti-pic {
+  background-image: url("https://i.imgur.com/PlYqyXm.png");
+  height: 155px;
+  width: 1440px;
 }
 
 h1 {
   margin-top: 100px;
   text-align: center;
-}
+}*/
+

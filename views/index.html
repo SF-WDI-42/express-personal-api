@@ -1,29 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <title>SkiMe</title>
+  
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Blank</title>
+  <!-- From Bootstrap to make modal work? -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
-    <!-- STYLESHEETS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/styles/styles.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  
+  <!-- Application CSS -->
+  <link rel="stylesheet" type="text/css" href="styles/styles.css">
 
-    <!-- VENDOR SCRIPTS -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  <!-- VENDOR SCRIPTS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-    <!-- APPLICATION SCRIPTS -->
-    <script src="/scripts/app.js"></script>
-  </head>
+  <!-- application js file -->
+  <script type="text/javascript" src="/scripts/app.js"></script> 
+</head>
+
   <body>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-          <h1>Under Construction</h1>
-          <h4><a href="/api">Read My API Documentation</a></h4>
-        </div>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Ski-Me</h1>
+        <h5>Live ski trail updates</h5>
       </div>
     </div>
+
+    <section id='ski-run-form' class="container">
+      <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+
+        <form class="form-horizontal add-run">
+          <fieldset>
+            <!-- Form Name -->
+            <legend>Add New Ski Run</legend>
+            <div class="form-group">
+              <label for="resort">What mountain?</label>
+              <select class="form-control" id="resort">
+                <option selected disabled>Select a resort</option>
+                <option value="1">Heavenly</option>
+                <option value="2">Kirkwood</option>
+                <option value="3">Northstar</option>
+                <option value="4">Alpine Meadow</option>
+                <option value="5">Squaw Valley</option>
+              </select>
+            </div>
+            <!-- end what mountain question -->
+            <div class="form-group">
+              <label for="skiTrail">Ski Trail</label>
+              <input type="text" class="form-control" id="skiTrail" placeholder="Skyline Trail">
+            </div>
+            <!-- end what ski run -->
+            <div class="form-group">
+              <label for="runRating">How were conditions?</label>
+              <select class="form-control" id="runRating">
+                <option selected disabled>Select an option</option>
+                <option value="1">1 - Icy, crusty, should have stayed home</option>
+                <option value="2">2 - Could be better, but beats working</option>
+                <option value="3">3 - Packed powder, still a solid ride</option>
+                <option value="4">4 - Fresh pow pow, bring your snorkel</option>
+              </select>
+            </div>
+            <!-- end run conditions -->
+            <div class="form-group">
+              <label for="skierAbility">Skier Ability</label>
+              <select class="form-control" id="skierAbility">
+                <option selected disabled>Choose ability</option>
+                <option value="1">Beginner</option>
+                <option value="2">Intermediate</option>
+                <option value="3">Advanced</option>
+                <option value="4">Expert</option>
+                <option value="5">Full send on everything</option>
+              </select>
+            </div>
+            <!-- end skier ability -->
+            <div class="form-group">
+              <label for="runCondition">Notes about run?</label>
+              <textarea class="form-control" id="runCondition" rows="3"></textarea>
+            </div>
+
+            <!-- Button -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="singlebutton">Save Ski Run</label>
+              <div class="col-md-4">
+                <input type="submit" value="Send it, brah!" id="singlebutton" name="singlebutton" class="btn btn-primary">
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <h2>Ski Runs</h2>
+        </div>
+      </div>
+      <!-- ski runs! -->
+      <div id="ski"></div>
+    </section>
+   
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h4><a href="/api">Read My API Documentation</a></h4>
+      </div>
+    </div>
+
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-ski-run">
+        Add a new ski run
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="add-ski-run" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modal-title">Add a new run review</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="resort">What mountain?</label>
+                  <select class="form-control" id="resort">
+                    <option selected disabled>Select a resort</option>
+                    <option value="1">Heavenly</option>
+                    <option value="2">Kirkwood</option>
+                    <option value="3">Northstar</option>
+                    <option value="4">Alpine Meadow</option>
+                    <option value="5">Squaw Valley</option>
+                  </select>
+                </div>
+                <!-- end what mountain question -->
+                <div class="form-group">
+                  <label for="skiTrail">Ski Trail</label>
+                  <input type="text" class="form-control" id="skiTrail" placeholder="Skyline Trail">
+                </div>
+                <!-- end what ski run -->
+                <div class="form-group">
+                  <label for="runRating">How were conditions?</label>
+                  <select class="form-control" id="runRating">
+                    <option selected disabled>Select an option</option>
+                    <option value="1">1 - Icy, crusty, should have stayed home</option>
+                    <option value="2">2 - Could be better, but beats working</option>
+                    <option value="3">3 - Packed powder, still a solid ride</option>
+                    <option value="4">4 - Fresh pow pow, bring your snorkel</option>
+                  </select>
+                </div>
+                <!-- end run conditions -->
+                <div class="form-group">
+                  <label for="skierAbility">Skier Ability</label>
+                  <select class="form-control" id="skierAbility">
+                    <option selected disabled>Choose ability</option>
+                    <option value="1">Beginner</option>
+                    <option value="2">Intermediate</option>
+                    <option value="3">Advanced</option>
+                    <option value="4">Expert</option>
+                    <option value="5">Full send on everything</option>
+                  </select>
+                </div>
+                <!-- end skier ability -->
+                <div class="form-group">
+                  <label for="runCondition">Notes about run?</label>
+                  <textarea class="form-control" id="runCondition" rows="3"></textarea>
+                </div>
+              </form>
+              <!-- end modal body -->
+            </div>
+            <div class="modal-footer">
+              <div class="col-sm-8 text-left">
+                <img id="yeti-gif" src="https://78.media.tumblr.com/e5d6405cb199f8674c635e7e94925ef7/tumblr_mw49i4gl3L1qz4rlko1_500.gif">
+              </div>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Send it!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end modal -->
+
+
+
+    <!-- <footer>
+      <div class="row">
+        <div class="col-md-12 yeti-pic">
+        </div>
+      </div>
+    </footer> -->
+
   </body>
 </html>
