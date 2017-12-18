@@ -13,6 +13,8 @@
 
     <!-- VENDOR SCRIPTS -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.1/js/all.js"></script>
 
     <!-- APPLICATION SCRIPTS -->
@@ -21,18 +23,64 @@
   <body>
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-8">
           <h1>My Friends</h1>
-          <h4><a href="/api">Read My API Documentation</a></h4>
         </div>
       </div>
 
+
       <div class="row alerts">
       </div>
+
       <!-- start of card column -->
       <div class="row">
         <div class="card-columns">
       <!-- cards -->
+        </div>
+      </div>
+    </div>
+    <!-- add modal here -->
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" id="addContact" data-toggle="modal" data-target="#contactModal">Add a new contact</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add a new contact</h5>
+
+            <button type="button" id="addContactButton" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- add form info -->
+            <form>
+              <div class="form-group">
+                <label class="col-form-label" for="contactName">Name</label>
+                <input type="text" class="form-control" name="name" id="contactName" placeholder="John Doe">
+              </div>
+              <div class="form-group">
+                <label class="col-form-label" for="contactPhone">Phone</label>
+                <input type="text" class="form-control" name="phoneNumber" id="contactPhone" placeholder="(250) 995-8899">
+              </div>
+              <div class="form-group">
+                <label class="col-form-label" for="contactEmail">Email</label>
+                <input type="text" class="form-control" name="email" id="contactEmail" placeholder="john.doe@mail.com">
+              </div>
+              <div class="form-group">
+                <label class="col-form-label" for="contactBirthday">Birthday</label>
+                <input type="text" class="form-control" name="birthday" id="contactBirthday" placeholder="September 1, 1999">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+            </form>
+          </div>
+
+
         </div>
       </div>
     </div>
