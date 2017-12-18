@@ -4,7 +4,7 @@ $(document).ready(function(){
 
   $.ajax({
     method: 'GET',
-    url: '/api/projects',
+    url: '/api/models/projects',
     success: handleSuccess,
     error: handleError
   });

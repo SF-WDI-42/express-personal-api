@@ -71,7 +71,7 @@ app.get('/api', function apiIndex(req, res) {
        githubLink: String,
        guthubProfileImage: String,
        personalSiteLink: String,
-       currentCity: String,
+       currentCity: "San Francisco",
        pets: [
          {name: "Molly",
           type: "Dog",
@@ -84,20 +84,25 @@ app.get('/api', function apiIndex(req, res) {
 
       {method: "POST",
        path: "/api/projects",
-       description: "Adds one of Adam's very interesting projects"}
+       description: "Adds one of Adam's very interesting projects"},
+
+       {method: "GET",
+        path: "/api/controllers",
+        description: "Controllers for database"},
     ]
   })
 });
 
-});
+// });  //maybe not needed?
+
 
 // GET ALL Projects
-function index(req, res) {
-  // access database and pull out all projects
-  db.Album.find({}, function(err, allProjects) {
-    res.json(allProjects);
-  });
-}
+// function index(req, res) {
+//   // access database and pull out all projects
+//   db.Album.find({}, function(err, allProjects) {
+//     res.json(allProjects);
+//   });
+// }
 
 
 
