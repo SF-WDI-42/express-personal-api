@@ -64,7 +64,13 @@ app.post('/api/contacts', function(req, res) {
   });
 });
 
-
+app.delete('api/contacts/:id', function(req, res) {
+  let contactId = req.params.id;
+  db.Contact.findOneAndRemove({ _id: contactId }, function(err, deletedContact) {
+    if (err) {console.log("error", err)}
+    res.json(deletedContact);
+  });
+});
 
 /*
  * JSON API Endpoints
