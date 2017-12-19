@@ -18,6 +18,7 @@ app.use(express.static('public'));
  * DATABASE *
  ************/
 var db = require('./models');
+var controllers = require('./controllers');
 var mongoose =  require('mongoose');
 
 // allow cross origin requests (optional)
