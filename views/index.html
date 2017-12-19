@@ -8,7 +8,7 @@
 
     <!-- STYLESHEETS -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="stylesheet" href="./styles/styles.css">
 
     <!-- VENDOR SCRIPTS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -41,16 +41,16 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="name">Restaurant Name</label>
               <div class="col-md-4">
-              <input id="name" name="name" type="text" placeholder="Dragon Eye" class="form-control input-md" required="">
+              <input id="name" name="name" type="name" placeholder="Dragon Eye" class="form-control input-md" required="">
 
               </div>
             </div>
 
             <!-- Text input-->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="type">Type of Style</label>
+              <label class="col-md-4 control-label" for="style">Type of Style</label>
               <div class="col-md-4">
-              <input id="textinput" name="artistName" type="text" placeholder="Chinese" class="form-control input-md">
+              <input id="style" name="typeOfStyle" type="text" placeholder="Chinese" class="form-control input-md">
 
               </div>
             </div>
@@ -59,7 +59,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="price">Average Price</label>
               <div class="col-md-4">
-              <input id="releaseDate" name="releaseDate" type="text" placeholder="$20/person" class="form-control input-md">
+              <input id="price" name="averagePrice" type="text" placeholder="$20/person" class="form-control input-md">
 
               </div>
             </div>
@@ -68,7 +68,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="description">Description</label>
               <div class="col-md-4">
-                <textarea class="form-control" id="feeling" name="comfortable">very comfortable</textarea>
+                <textarea class="form-control" id="description" name="description">very comfortable</textarea>
               </div>
             </div>
 
@@ -95,43 +95,7 @@
       <!-- albums! -->
       <div id="resInput"></div>
     </section>
-
-    <!-- begin songModal: this is not visible until you call .modal() on it -->
-    <div class="modal fade" tabindex="-1" role="dialog" id="songModal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Create Restaurant</h4>
-          </div>
-          <div class="modal-body">
-
-            <fieldset class='form-horizontal'>
-              <!-- Text input-->
-              <div class="form-group">
-                <label class="col-md-4 control-label" for="songName"> Name</label>
-                <div class="col-md-4">
-                  <input id="songName" name="songName" type="text" placeholder="" class="form-control input-md" required="">
-                </div>
-              </div>
-
-              <!-- Text input-->
-              <div class="form-group">
-                <label class="col-md-4 control-label" for="trackNumber">Track Number</label>
-                <div class="col-md-4">
-                  <input id="trackNumber" name="trackNumber" type="text" placeholder="" class="form-control input-md">
-                </div>
-              </div>
-            </fieldset>
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="saveSong">Save changes</button>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+<!--  -->
 
 
   </body>

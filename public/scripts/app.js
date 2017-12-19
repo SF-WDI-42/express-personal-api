@@ -31,12 +31,12 @@ $(document).ready(function(){
     error: handleError
   });
 
-  $('#singlebutton').on('submit', function(e) {
+  $('form').on('submit', function(e) {
     e.preventDefault();
     var formData = $(this).serialize();
 
     $.post('/api/restaurant', formData, function(restaurant) {
-      renderAlbum(restaurant);
+      renderRes(restaurant);
     })
 
     // reset form input values after formData has been captured
@@ -109,7 +109,7 @@ var resHtml = `
 
   </div>
   <!-- end one album -->
-`;
+`
 
 // render HTML template in the DOM
   $('#resInput').prepend(resHtml);
