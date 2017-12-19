@@ -1,24 +1,18 @@
 console.log("Sanity Check: JS is working!");
 
 $(document).ready(function(){
-var $p_id;
+  var $p_id;
 
-$("#addProject").fadeOut();
-$("#addVacation").fadeOut();
+  $("#addProject").fadeOut();
+  $("#addVacation").fadeOut();
 
-$('ul.nav li').click(function(){
-
-    console.log("event fired");
-    console.log($(this));
+  $('ul.nav li').click(function(){
     $(this).addClass('active');
     $(this).siblings().removeClass('active');
 
-   if(($(this).context.textContent)=="About")
-   {
-     $("#addProject").fadeOut();
-     console.log("About section");
-     //about section
-     $.ajax({
+    if(($(this).context.textContent)=="About") {
+      $("#addProject").fadeOut();
+      $.ajax({
        method:"GET",
        url:'/api/profile',
        success:function(data){
@@ -27,9 +21,9 @@ $('ul.nav li').click(function(){
        error: function(err){
          console.log("ajax call failed for About Section",err);
        }
-     })
-     function renderAbout(data){
+      });
 
+      function renderAbout(data){
         $("#results").empty();
         $("#results").append(
          ` <div class="row">
@@ -47,66 +41,39 @@ $('ul.nav li').click(function(){
          `
        );
      }
-   }
-   else if(($(this).context.textContent)==="My Work")
-   {
-     //projects section
-
+    } else if(($(this).context.textContent)==="My Work") {
      $("#addProject").fadeIn();
      $("#addVacation").fadeOut();
 
-     console.log("Projects section");
      $.ajax({
        method:"GET",
        url:'/api/profile/projects',
        success:function(data){
-         console.log(data);
          $p_id=data[0]._id;
-         console.log($p_id);
          $("#results").empty();
-
-         console.log(data[0].projects.length);
          renderAllProjects(data);
-
        },
        error: function(err){
          console.log("ajax call failed for My Work",err);
        }
-     })
-     var link=`/api/profile/${$p_id}/projects/:_id`
-     $.ajax({
-       method:'GET',
-       url:link,
-       success:function(data){
-         console.log(data);
-       },
-       error:function(err){
-         console.log(err);
-       }
-     })
-   }
-   else if(($(this).context.textContent)==="Vacation")
-   {
+     });
+   } else if(($(this).context.textContent)==="Vacation") {
     $("#addProject").fadeOut();
     $("#addVacation").fadeIn();
 
-    console.log("Vacation section");
     $.ajax({
       method:"GET",
       url:`/api/profile/${$p_id}/vacation`,
       success:function(data){
-        console.log(data);
         $("#results").empty();
-
-        console.log(data[0].vacation.length);
         renderAllVacation(data);
-
       },
       error: function(err){
         console.log("ajax call failed for Vacation",err);
       }
     })
    }
+
    function renderAllVacation(data){
      for(i=0;i<data[0].vacation.length;i++){
        $("#results").append(
@@ -149,7 +116,7 @@ $('ul.nav li').click(function(){
   $.ajax({
     method:'POST',
     url:url_link,
-    success:SaveNewProject,
+    success:saveNewProject,
     data:data,
     error:function(err){
       if(err){
@@ -167,7 +134,7 @@ $('ul.nav li').click(function(){
   $.ajax({
     method:'POST',
     url:url_link,
-    success:SaveNewVacationPlan,
+    success: saveNewVacationPlan,
     data:data,
     error:function(err){
       if(err){
@@ -177,18 +144,16 @@ $('ul.nav li').click(function(){
   })
   });
 
-  function SaveNewVacationPlan(data){
+  function  saveNewVacationPlan(data){
       alert("Saved New Vacation Plan Successfully");
   }
 
-  function SaveNewProject(data){
+  function saveNewProject(data){
     alert("Saved New Project Successfully");
   }
   
   $("#results").on('click', '.deleteBtn', function() {
-  console.log("delete");
-  var delete_link= `/api/profile/${$(this).attr('data-profileid')}/projects/${$(this).attr('data-projid')}`
-  console.log(delete_link);
+    var delete_link= `/api/profile/${$(this).attr('data-profileid')}/projects/${$(this).attr('data-projid')}`;
     $.ajax({
       method: 'DELETE',
       url:delete_link,
