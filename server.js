@@ -56,11 +56,11 @@ app.get('/api', controllers.api.index);
 app.get('/api/projects', controllers.projects.index);
 app.get('/api/projects/:project_id', controllers.projects.show);
 
-app.post('/api/albums', controllers.projects.create);
+app.post('/api/projects', controllers.projects.create);
 
-app.put('/api/albums/:id', controllers.albums.update);
+app.put('/api/projects/:id', controllers.projects.update);
 
-app.delete('/api/albums/:album_id', controllers.albums.destroy);
+app.delete('/api/projects/:project_id', controllers.projects.destroy);
 
 
 /*///////////////////////////////////////////////////////////////////////////
