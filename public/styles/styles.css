@@ -13,14 +13,14 @@ h1 {
   background-image: url("https://static.pexels.com/photos/45170/kittens-cat-cat-puppy-rush-45170.jpeg");
   background-size: cover;
   background-repeat: no-repeat;
-  color: #EEE;
+  color: #EEEEE1;
 }
 .jumbotron .container {
-  height: 350px;
+  height: 330px;
 }
 
 .inline-header {
   display: inline-block;
   vertical-align: baseline;
-  margin-right: 12px;
+  margin-right: 15px;
 }
