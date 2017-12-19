@@ -3,17 +3,22 @@
  ****************/
 var express = require('express');
 var app = express();
-var mongoose =  require('mongoose');
-var db = require('./models');
-var controllers = require('./controllers');
-
-
 // parse incoming urlencoded form data
 // and populate the req.body object
 var bodyParser = require('body-parser');
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Serve static files from the `/public` directory:
+// i.e. `/images`, `/scripts`, `/styles`
+app.use(express.static('public'));
 
+
+/************
+ * DATABASE *
+ ************/
+var db = require('./models');
+var mongoose =  require('mongoose');
 
 // allow cross origin requests (optional)
 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
@@ -23,9 +28,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-/************
- * DATABASE *
- ************/
+
 
 
 
@@ -33,14 +36,13 @@ app.use(function(req, res, next) {
  * ROUTES *
  **********/
 
-// Serve static files from the `/public` directory:
-// i.e. `/images`, `/scripts`, `/styles`
-app.use(express.static('public'));
+
 
 /*
  * HTML Endpoints
  */
 
+//serving route for GET index.html
 app.get('/', function homepage(req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
@@ -50,6 +52,18 @@ app.get('/', function homepage(req, res) {
  * JSON API Endpoints
  */
 
+app.get('/api', controllers.api.index);
+app.get('/api/projects', controllers.projects.index);
+app.get('/api/projects/:project_id', controllers.projects.show);
+
+app.post('/api/albums', controllers.projects.create);
+
+app.put('/api/albums/:id', controllers.albums.update);
+
+app.delete('/api/albums/:album_id', controllers.albums.destroy);
+
+
+/*///////////////////////////////////////////////////////////////////////////
 app.get('/api', function apiIndex(req, res) {
   // TODO: Document all your api endpoints below as a simple hardcoded JSON object.
   // It would be seriously overkill to save any of this to your database.
@@ -88,21 +102,11 @@ app.get('/api', function apiIndex(req, res) {
 
        {method: "GET",
         path: "/api/controllers",
-        description: "Controllers for database"},
+        description: "Controllers for database"}
     ]
   })
 });
-
-// });  //maybe not needed?
-
-
-// GET ALL Projects
-// function index(req, res) {
-//   // access database and pull out all projects
-//   db.Album.find({}, function(err, allProjects) {
-//     res.json(allProjects);
-//   });
-// }
+///////////////////////////////////////////////////////////////////////////*/
 
 
 
