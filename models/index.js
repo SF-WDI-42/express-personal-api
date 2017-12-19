@@ -5,11 +5,8 @@ mongoose.connect( process.env.MONGODB_URI || "mongodb://localhost/personal-api",
 mongoose.Promise = global.Promise;  // use native Promise
 
 
-// module.exports = {
-//   api: require('./apiController'),
-//   projects: require('./projectsController'),
-// }
+var Projects = require('./projects');
 
 module.exports = {
-  projects: require('./projects')
-}
+  Projects: Projects
+};
