@@ -19,7 +19,7 @@ app.use(function(req, res, next) {
  * DATABASE *
  ************/
 
-// var db = require('./models');
+var db = require('./models');
 
 /**********
  * ROUTES *
@@ -47,16 +47,98 @@ app.get('/api', function apiIndex(req, res) {
   // It would be seriously overkill to save any of this to your database.
   // But you should change almost every line of this response.
   res.json({
-    woopsIForgotToDocumentAllMyEndpoints: true, // CHANGE ME ;)
+    woopsIForgotToDocumentAllMyEndpoints: false, // CHANGE ME ;)
     message: "Welcome to my personal api! Here's what you need to know!",
-    documentationUrl: "https://github.com/example-username/express-personal-api/README.md", // CHANGE ME
-    baseUrl: "http://YOUR-APP-NAME.herokuapp.com", // CHANGE ME
+    documentationUrl: "https://github.com/SwethaMuralidharan/express-personal-api/blob/master/README.md", // CHANGE ME
+    baseUrl: "https://enigmatic-caverns-31537.herokuapp.com/", // CHANGE ME
     endpoints: [
-      {method: "GET", path: "/api", description: "Describes all available endpoints"},
-      {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/campsites", description: "E.g. Create a new campsite"} // CHANGE ME
+      {method: "GET", path: "/api", description: "Describes all available endpoints"}, // done
+      {method: "GET", path: "/api/profile", description: "Data about me"}, // done
+
+      {method: "POST",path: "/api/profile/:profile_id/projects",description:"creates new project"}, //done
+      {method: "DELETE", path:"/api/profile/:profile_id/projects/:_id", description:"deletes that project"},//done
+      {method: "PUT", path:"/api/profile/:profile_id/projects/:_id", description:"Updates that project by ID"},//done
+
+      {method: "GET", path: "/api/profile",description:"destinations i've visited"},//done
+      {method: "POST",path:"/api/profile/:profile_id/vacation",description:"Creates an entry for vacations under planning"}//done
+
     ]
   })
+});
+
+/*End Point 2 - Get Profile Info*/
+app.get('/api/profile', function show(req, res) {
+  console.log("Inside get profile",req.body);
+  db.Profile.find({},function(err,new_profile){
+    if(err) { console.log(" new profile does not exist", err)}
+    res.json(new_profile);
+  })
+});
+
+/* End Point 3 - Create new project*/
+app.post('/api/profile/:profile_id/projects',function(req,res){
+  console.log(`inside create projects method ${req}`);
+  console.log(JSON.stringify(req.body));
+  db.Profile.findById(req.params.profile_id,function(err,foundProfile){
+
+  var newProject=new db.Projects(req.body);
+
+  foundProfile.projects.push(newProject);
+  foundProfile.save(function(err,savedprofile){
+    res.json(savedprofile);
+  })
+})
+});
+
+/*End Point 4 - delete project by ID*/
+app.delete("/api/profile/:profile_id/projects/:_id",function destroy(req, res) {
+  db.Profile.findById(req.params.profile_id, function(err, foundproj) {
+    console.log(foundproj);
+
+    var correctProj = foundproj.projects.id(req.params._id);
+    if (correctProj) {
+      correctProj.remove();
+
+      foundproj.save(function(err, saved) {
+        console.log('REMOVED ', correctProj.name);
+        res.json(correctProj);
+      });
+    }
+  });
+});
+
+/* End Point 5 - update project*/
+app.put("/api/profile/:profile_id/projects/:_id",function update(req, res) {
+  db.Profile.findById(req.params.profile_id, function(err, foundProfile) {
+    var correctProj = foundProfile.projects.id(req.params._id);
+
+    if (correctProj) {
+      correctProj.name = req.body.name;
+      correctProj.description = req.body.description;
+      correctProj.project_url=req.body.project_url;
+      correctProj.image_url=req.body.image_url;
+
+      foundProfile.save(function(err, saved) {
+        console.log('UPDATED', correctProj);
+        res.json(correctProj);
+      });
+    }
+  });
+});
+
+// End Point 6 - Add New vacation under planning
+
+app.post('/api/profile/:profile_id/vacation',function(req,res){
+  console.log(JSON.stringify(req.body));
+  db.Profile.findById(req.params.profile_id,function(err,foundProfile){
+
+  var newVacation=new db.Vacation(req.body);
+
+  foundProfile.vacation.push(newVacation);
+  foundProfile.save(function(err,savedprofile){
+    res.json(savedprofile);
+  })
+})
 });
 
 /**********
@@ -64,6 +146,7 @@ app.get('/api', function apiIndex(req, res) {
  **********/
 
 // listen on the port that Heroku prescribes (process.env.PORT) OR port 3000
+
 app.listen(process.env.PORT || 3000, function () {
   console.log('Express server is up and running on http://localhost:3000/');
 });
