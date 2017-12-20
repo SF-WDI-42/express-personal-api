@@ -20,10 +20,162 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
-          <h1>Under Construction</h1>
+          <h1>Adam's personal API Project</h1>
           <h4><a href="/api">Read My API Documentation</a></h4>
+        </div>
+
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+          <h1><a href="/projects">Info about Projects</a></h1>
+          </div>
+        </div>
+
+        <div class="row">
+          <h1>Get to know Adam</h1>
         </div>
       </div>
     </div>
+
+<div>BREAK LINE</div>
+
+//JUMBOTRON BEGINNING
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>Welcome to tunely</h1>
+    <p>Your music binder!</p>
+  </div>
+</div>
+
+<section id='project-form' class="container">
+  <div class="row">
+  <div class="col-md-10 col-md-offset-1">
+
+    <form class="form-horizontal">
+      <fieldset>
+
+        <!-- Form Name -->
+        <legend>Add New Project</legend>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="name">Project Name</label>
+          <div class="col-md-4">
+          <input id="name" name="name" type="text" placeholder="" class="form-control input-md" required="">
+
+          </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="artistName">Artist Name</label>
+          <div class="col-md-4">
+          <input id="textinput" name="artistName" type="text" placeholder="" class="form-control input-md">
+
+          </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="releaseDate">Release Date</label>
+          <div class="col-md-4">
+          <input id="releaseDate" name="releaseDate" type="text" placeholder="1992" class="form-control input-md">
+
+          </div>
+        </div>
+
+        <!-- Textarea -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="genres">Genres (separated by commas)</label>
+          <div class="col-md-4">
+            <textarea class="form-control" id="genres" name="genres">rock, pop</textarea>
+          </div>
+        </div>
+
+
+        <!-- Button -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="singlebutton">Save Project</label>
+          <div class="col-md-4">
+            <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+  </div>
+</section>
+
+<section class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <h2>Projects</h2>
+    </div>
+  </div>
+  <!-- projects! -->
+  <div id="projects"></div>
+</section>
+
+<!-- begin songModal: this is not visible until you call .modal() on it -->
+<div class="modal fade" tabindex="-1" role="dialog" id="songModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Create Song</h4>
+      </div>
+      <div class="modal-body">
+
+        <fieldset class='form-horizontal'>
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="songName">Song Name</label>
+            <div class="col-md-4">
+              <input id="songName" name="songName" type="text" placeholder="" class="form-control input-md" required="">
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="trackNumber">Track Number</label>
+            <div class="col-md-4">
+              <input id="trackNumber" name="trackNumber" type="text" placeholder="" class="form-control input-md">
+            </div>
+          </div>
+        </fieldset>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="saveSong">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Edit Songs Modal -->
+<div class="modal fade bs-modal-lg" id="editSongsModal" tabindex="-1" role="dialog" aria-labelledby="editSongsModalTitle">
+  <div class="modal-dialog  modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="editSongsModalTitle">Edit Song List</h4>
+      </div>
+      <div class="modal-body" id='editSongsModalBody'>
+        <p> REPLACE #editSongsModalBody </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" id="editSongsModalSubmit">Save</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+
+
   </body>
 </html>
