@@ -21,18 +21,22 @@ var db = require("./models");
 
 //Restaurant LIST VARIABLE
 var sampleRestaurants = [{
+  name: 'adsaa',
   typeOfStyle: 'chinese',
   averagePrice: '$15/person',
   description: 'tasty and healthy',
 }, {
+  name: 'hahaha',
   typeOfStyle: 'Italy',
   averagePrice: '$25/person',
   description: 'popular and delicious',
 }, {
+  name: 'lalal',
   typeOfStyle: 'French',
   averagePrice: '$28/person',
   description: 'classic',
 }, {
+  name:'dragon',
   typeOfStyle: 'American',
   averagePrice: '$30/person',
   description: 'more creative',
@@ -42,15 +46,14 @@ var sampleRestaurants = [{
 db.Restaurant.remove({}, function(err, restaurants){
   console.log('removed all restaurants');
 
-  albumsList.forEach(function (albumObj) {
-    var album = new db.Album(albumObj);
-    album.songs = songsList;
-    album.save(function(err, savedAlbum){
+  sampleRestaurants.forEach(function (resObj) {
+    var restaurant = new db.Restaurant(resObj);
+    restaurant.save(function(err, savedRes){
       if (err) {
         console.log(err);
         return;
       }
-      console.log('saved ', savedAlbum.name);
+      console.log('saved ', savedRes.name);
     });
   });
 });
