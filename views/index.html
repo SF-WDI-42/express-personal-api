@@ -1,29 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Blank</title>
+    <title>Marvel Characters App</title>
 
     <!-- STYLESHEETS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="/styles/styles.css">
 
     <!-- VENDOR SCRIPTS -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- APPLICATION SCRIPTS -->
-    <script src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
-  <body>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-          <h1>Under Construction</h1>
-          <h4><a href="/api">Read My API Documentation</a></h4>
-        </div>
+  <body background="/images/Marvel-Heroes-Logo.jpg">
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Marvel Characters</h1>
+        <h4><a href="/api">Read My API Documentation</a></h4>
       </div>
     </div>
+
+    <section class="container new_character_section">
+      <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <form id='character-form' class="form-horizontal">
+          <fieldset>
+            <!-- Form Name -->
+            <legend>Add New Character</legend>
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name">Character Name</label>
+              <div class="col-md-4">
+                <input id="name" name="name" type="text" placeholder="" class="form-control input-md" required="">
+              </div>
+            </div>
+            <!-- Textarea -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="Abilities">Abilities</label>
+              <div class="col-md-4">
+                <textarea class="form-control" id="Abilities" name="Abilities"></textarea>
+              </div>
+            </div>
+            <!-- Button -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="singlebutton">Save Character</label>
+              <div class="col-md-4">
+                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      </div>
+    </section>
+
+      <section class="container">
+      <div class="row">
+        <div class="col-xs-6 col-xs-offset-1">
+          
+        </div>
+      </div> 
+    
+      <h2>Characters</h2>
+      <div id="Characters"></div>  
+     </section> 
+
   </body>
 </html>
